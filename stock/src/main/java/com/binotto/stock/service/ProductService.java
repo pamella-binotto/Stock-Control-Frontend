@@ -4,6 +4,9 @@ import com.binotto.stock.model.Product;
 import com.binotto.stock.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -29,7 +32,9 @@ public class ProductService {
 
     public Product findById (long id){
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Product not found"));
+
     }
 
     public Product update(Long id, Product p) {
@@ -44,7 +49,8 @@ public class ProductService {
     }
 
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Product p = findById(id);
+        productRepository.delete(p);
     }
 
 }
