@@ -1,4 +1,4 @@
-function ProductList({ products, onDelete }) {
+function ProductList({ products, onDelete, onEdit }) {
   return (
     <div>
       {products.map((product) => (
@@ -9,6 +9,8 @@ function ProductList({ products, onDelete }) {
           <p>Category: {product.category}</p>
 
           <button onClick={() => onDelete(product.id)}>Delete</button>
+          <button onClick={() => onEdit(product)}>Edit</button>
+
 
           <hr />
         </div>
