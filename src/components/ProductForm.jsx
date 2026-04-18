@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
 
-function ProductForm({ onCreate, onUpdate, editingProduct }) {
+function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
 
-  
-   useEffect(() => {
-  if (editingProduct) {
-    setName(editingProduct.name);
-    setQuantity(editingProduct.quantity);
-    setPrice(editingProduct.price);
-    setCategory(editingProduct.category);
-  }
-}, [editingProduct]);
+  useEffect(() => {
+    if (editingProduct) {
+      setName(editingProduct.name);
+      setQuantity(editingProduct.quantity);
+      setPrice(editingProduct.price);
+      setCategory(editingProduct.category);
+    }
+  }, [editingProduct]);
 
-  
+
+  function resetForm() {
+    setName("");
+    setQuantity("");
+    setPrice("");
+    setCategory("");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -28,17 +34,13 @@ function ProductForm({ onCreate, onUpdate, editingProduct }) {
     };
 
     if (editingProduct) {
-    onUpdate(editingProduct.id, product);
-  } else {
-    onCreate(product);
-  }
+      onUpdate(editingProduct.id, product);
+      onCancelEdit(); 
+    } else {
+      onCreate(product);
+    }
 
-    onCreate(product);
-
-    setName("");
-    setQuantity("");
-    setPrice("");
-    setCategory("");
+    resetForm();
   }
 
   return (
@@ -48,10 +50,24 @@ function ProductForm({ onCreate, onUpdate, editingProduct }) {
       <input placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
       <input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
 
-      <button type="submit">{editingProduct ? "Update" : "Register"}</button>
+      <button type="submit">
+        {editingProduct ? "Update" : "Register"}
+      </button>
+
+      
+      {editingProduct && (
+        <button
+          type="button"
+          onClick={() => {
+            resetForm();
+            onCancelEdit();
+          }}
+        >
+          Cancel
+        </button>
+      )}
     </form>
   );
-
 }
 
 export default ProductForm;

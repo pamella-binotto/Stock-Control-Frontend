@@ -11,6 +11,10 @@ function App() {
   function handleEdit(product) {
   setEditingProduct(product);
 }
+
+function handleCancelEdit() {
+  setEditingProduct(null);
+}
   
 
   return (
@@ -20,8 +24,12 @@ function App() {
       
       <ErrorMessage message={error} />
 
-      <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} onUpdate={handleUpdate} />
-      <ProductList products={products} onDelete={handleDelete} onEdit={handleEdit} />
+      <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} 
+      onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} />
+      
+      <ProductList products={products} onDelete={handleDelete}
+       onEdit={handleEdit}  />
+    
     </div>
   );
 }
