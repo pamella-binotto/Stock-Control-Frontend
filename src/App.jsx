@@ -4,7 +4,8 @@ import ErrorMessage from "./components/ErrorMessage";
 import { useProducts } from "./hooks/useProducts";
 
 function App() {
-  const { products, error, handleCreate, handleDelete } = useProducts();
+  const { products, error, handleCreate, handleDelete, handleUpdate, editingProduct } = useProducts();
+  
 
   return (
     <div>
@@ -13,7 +14,7 @@ function App() {
       
       <ErrorMessage message={error} />
 
-      <ProductForm onCreate={handleCreate} />
+      <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} onUpdate={handleUpdate} />
       <ProductList products={products} onDelete={handleDelete} />
     </div>
   );

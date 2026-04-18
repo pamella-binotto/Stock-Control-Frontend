@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts, createProduct, deleteProduct } from "../services/api";
+import { getProducts, createProduct, deleteProduct, updateProduct } from "../services/api";
 
 export function useProducts() {
   const [products, setProducts] = useState([]);
@@ -37,10 +37,25 @@ export function useProducts() {
     }
   }
 
+  async function handleUpdate(id, product) {
+  try {
+    const updated = await updateProduct(id, product);
+
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? updated : p))
+    );
+
+    setError(null);
+  } catch (err) {
+    setError("Failed to update product.");
+  }
+}
+
   return {
     products,
     error,
     handleCreate,
     handleDelete,
+    handleUpdate
   };
 }

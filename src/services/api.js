@@ -22,3 +22,15 @@ export async function deleteProduct(id) {
     method: "DELETE",
   });
 }
+
+export async function updateProduct(id, product) {
+  const response = await fetch(`${BASE_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
+
+  return response.json();
+}

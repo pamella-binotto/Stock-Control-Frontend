@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function ProductForm({ onCreate }) {
+function ProductForm({ onCreate, onUpdate, editingProduct }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
 
+  
+   useEffect(() => {
+  if (editingProduct) {
+    setName(editingProduct.name);
+    setQuantity(editingProduct.quantity);
+    setPrice(editingProduct.price);
+    setCategory(editingProduct.category);
+  }
+}, [editingProduct]);
+
+  
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -15,6 +26,12 @@ function ProductForm({ onCreate }) {
       price: Number(price),
       category,
     };
+
+    if (editingProduct) {
+    onUpdate(editingProduct.id, product);
+  } else {
+    onCreate(product);
+  }
 
     onCreate(product);
 
@@ -31,7 +48,7 @@ function ProductForm({ onCreate }) {
       <input placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
       <input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
 
-      <button type="submit">Register</button>
+      <button type="submit">{editingProduct ? "Update" : "Register"}</button>
     </form>
   );
 
