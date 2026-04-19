@@ -10,6 +10,18 @@ export function useProducts() {
     loadProducts();
   }, []);
 
+  useEffect(() => 
+    {
+      if (success){
+        const timer = setTimeout(() => 
+        setSuccess(null),
+        3000);
+
+        return () => clearTimeout(timer);
+
+      }
+    }, [success] )
+
   async function loadProducts() {
     try {
       const data = await getProducts();
@@ -52,7 +64,7 @@ export function useProducts() {
       prev.map((p) => (p.id === id ? updated : p))
     );
     setError(null);
-    setSuccess("Product update successfully.")
+    setSuccess("Product updated successfully ✅")
   } catch (err) {
     setError("Failed to update product.");
     setSuccess(null)
