@@ -2,10 +2,12 @@ import { useState } from "react";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
 import ErrorMessage from "./components/ErrorMessage";
+import SuccessMessage from "./components/SuccessMessage";
 import { useProducts } from "./hooks/useProducts";
 
+
 function App() {
-  const { products, error, handleCreate, handleDelete, handleUpdate} = useProducts();
+  const { products, error, success, handleCreate, handleDelete, handleUpdate} = useProducts();
   const [editingProduct, setEditingProduct] = useState(null);
 
   function handleEdit(product) {
@@ -23,6 +25,7 @@ function handleCancelEdit() {
 
       
       <ErrorMessage message={error} />
+      <SuccessMessage message={success} />
 
       <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} 
       onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} />

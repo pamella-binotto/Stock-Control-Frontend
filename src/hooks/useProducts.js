@@ -4,6 +4,7 @@ import { getProducts, createProduct, deleteProduct, updateProduct } from "../ser
 export function useProducts() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   useEffect(() => {
     loadProducts();
@@ -23,8 +24,11 @@ export function useProducts() {
       const newProduct = await createProduct(product);
       setProducts((prev) => [...prev, newProduct]);
       setError(null);
+      setSuccess("Product created successfully.")
     } catch (err) {
       setError("Failed to create product.");
+      setSuccess(null);
+
     }
   }
 
@@ -32,8 +36,11 @@ export function useProducts() {
     try {
       await deleteProduct(id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
+      setSuccess("Product deleted successfully.")
     } catch (err) {
       setError("Failed to delete product.");
+      setSuccess(null);
+    
     }
   }
 
@@ -44,16 +51,18 @@ export function useProducts() {
     setProducts((prev) =>
       prev.map((p) => (p.id === id ? updated : p))
     );
-
     setError(null);
+    setSuccess("Product update successfully.")
   } catch (err) {
     setError("Failed to update product.");
+    setSuccess(null)
   }
 }
 
   return {
     products,
     error,
+    success,
     handleCreate,
     handleDelete,
     handleUpdate
