@@ -7,7 +7,7 @@ import { useProducts } from "./hooks/useProducts";
 
 
 function App() {
-  const { products, error, success, handleCreate, handleDelete, handleUpdate} = useProducts();
+  const { products, error, success, loading, handleCreate, handleDelete, handleUpdate} = useProducts();
   const [editingProduct, setEditingProduct] = useState(null);
 
   function handleEdit(product) {
@@ -23,12 +23,14 @@ function handleCancelEdit() {
     <div>
       <h1>Stock</h1>
 
+       {loading && <p className="loading">Loading...</p>}
+
       
       <ErrorMessage message={error} />
       <SuccessMessage message={success} />
 
       <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} 
-      onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} />
+      onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} loading={loading}/>
       
       <ProductList products={products} onDelete={handleDelete}
        onEdit={handleEdit}  />

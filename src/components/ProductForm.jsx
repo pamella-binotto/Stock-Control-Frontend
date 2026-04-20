@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit }) {
+function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -51,7 +51,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit }) {
       <input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
 
       <button type="submit">
-        {editingProduct ? "Update" : "Register"}
+        {loading ? "Saving..." : editingProduct ? "Update" : "Register"}
       </button>
 
       
