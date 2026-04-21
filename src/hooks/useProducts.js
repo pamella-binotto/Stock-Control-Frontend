@@ -43,8 +43,17 @@ export function useProducts() {
       setError(null);
       setSuccess("Product created successfully.")
     } catch (err) {
-      setError("Failed to create product.");
+      if(err.errors){
+        const messages = Object.values(err.errors).join(" , ");
+          setError(messages);
+      } else if (err.message){
+        setError(err.message);
+      }else{
+        setError("Failed to create product.");
+      }
+
       setSuccess(null);
+
     }
     finally {
       setLoading(false);

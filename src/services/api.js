@@ -1,8 +1,19 @@
 const BASE_URL = "http://localhost:8080/products";
 
+
+async function handleResponse(response) {
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw data;
+  }
+
+  return data;
+}
+
 export async function getProducts() {
   const response = await fetch(BASE_URL);
-  return response.json();
+  return handleResponse(response); 
 }
 
 export async function createProduct(product) {
@@ -14,13 +25,15 @@ export async function createProduct(product) {
     body: JSON.stringify(product),
   });
 
-  return response.json();
+  return handleResponse(response);
 }
 
 export async function deleteProduct(id) {
-  await fetch(`${BASE_URL}/${id}`, {
+  const response = await fetch(`${BASE_URL}/${id}`, {
     method: "DELETE",
   });
+
+  return handleResponse(response);
 }
 
 export async function updateProduct(id, product) {
@@ -32,5 +45,5 @@ export async function updateProduct(id, product) {
     body: JSON.stringify(product),
   });
 
-  return response.json();
+  return handleResponse(response);
 }
