@@ -5,7 +5,7 @@ export function useProducts() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadProducts();
@@ -27,6 +27,7 @@ export function useProducts() {
 
   async function loadProducts() {
     try {
+      setLoading(true)
       const data = await getProducts();
       setProducts(data);
     } catch (err) {
@@ -36,20 +37,26 @@ export function useProducts() {
     }
   }
 
+  function extractErrorMessage(err, defaultMessage){
+      if (err.errors){
+        return Object.values(err.errors).join(", ");
+      }
+      if (err.message){
+        return err.message;
+      }
+      return defaultMessage
+  }
+
   async function handleCreate(product) {
     try {
+      setLoading(true);
       const newProduct = await createProduct(product);
       setProducts((prev) => [...prev, newProduct]);
       setError(null);
       setSuccess("Product created successfully.")
     } catch (err) {
-      if(err.errors){
-        const messages = Object.values(err.errors).join(" , ");
-          setError(messages);
-      } else if (err.message){
-        setError(err.message);
-      }else{
-        setError("Failed to create product.");
+      if(err){
+        setError(extractErrorMessage(err, "Failed to create product."))
       }
 
       setSuccess(null);
@@ -66,11 +73,12 @@ export function useProducts() {
     if (!confirmDelete) return;
 
     try {
+      setLoading(true);
       await deleteProduct(id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
       setSuccess("Product deleted successfully ✅")
     } catch (err) {
-      setError("Failed to delete product.");
+      setError(extractErrorMessage(err, "Failed to delete product."));
       setSuccess(null);
     }
     finally {
@@ -80,6 +88,7 @@ export function useProducts() {
 
   async function handleUpdate(id, product) {
     try {
+      setLoading(true);
       const updated = await updateProduct(id, product);
 
       setProducts((prev) =>
@@ -88,7 +97,7 @@ export function useProducts() {
       setError(null);
       setSuccess("Product updated successfully ✅")
     } catch (err) {
-      setError("Failed to update product.");
+      setError(extractErrorMessage(err, "Failed to update product."))
       setSuccess(null)
     } finally {
       setLoading(false);
