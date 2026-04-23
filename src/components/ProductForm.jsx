@@ -29,7 +29,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
 
     const product = {
       name,
-      quantity: Number(quantity),
+      quantity: quantity === "" ? null : Number(quantity),
       price: Number(price),
       category,
     };
@@ -48,7 +48,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
     <form onSubmit={handleSubmit}>
 
       <div className="form-group">
-        <input className={error ? "input error" : "input"}
+        <input className={error?.name ? "input error" : "input"}
           placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         {error?.name && (
           <p className="error-text"> {error.name}</p>
@@ -56,7 +56,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
       </div>
 
       <div className="form-group">
-        <input className={error ? "input error" : "input"}
+        <input className={error?.quantity ? "input error" : "input"}
           placeholder="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
 
         {error?.quantity && (
@@ -65,7 +65,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
       </div>
 
       <div className="form-group">
-        <input className={error ? "input error" : "input"}
+        <input className={error?.price ? "input error" : "input"}
           placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
 
         {error?.price && (
@@ -74,7 +74,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
       </div>
 
       <div className="form-group">
-        <input className={error ? "input error" : "input"}
+        <input className={error?.category ? "input error" : "input"}
           placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
 
         {error?.category && (

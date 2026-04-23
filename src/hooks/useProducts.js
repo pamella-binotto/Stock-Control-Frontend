@@ -38,11 +38,33 @@ export function useProducts() {
   }
 
   function extractErrorMessage(err, defaultMessage) {
-    if (err.errors) {
-      return err.errors;
-    }
-    return { general: err.message || defaultMessage };
+  if (err.message) {
+    const errors = {};
+    const parts = err.message.split(",");
+
+    parts.forEach((part) => {
+      const clean = part.trim();
+
+     
+      const separatorIndex = clean.indexOf(":");
+
+      if (separatorIndex !== -1) {
+        const field = clean.substring(0, separatorIndex).trim().toLowerCase();
+        const message = clean.substring(separatorIndex + 1).trim();
+
+        errors[field] = message;
+      }
+    });
+
+    return errors;
+
+    
   }
+
+  return { general: defaultMessage };
+
+  
+}
 
 
   async function handleCreate(product) {
@@ -55,7 +77,7 @@ export function useProducts() {
       setError(null);
       setSuccess("Product created successfully.")
     } catch (err) {
-      
+
       setError(extractErrorMessage(err, "Failed to create product."))
       setSuccess(null);
 
@@ -113,3 +135,4 @@ export function useProducts() {
     handleUpdate
   };
 }
+

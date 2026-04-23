@@ -26,7 +26,7 @@ function handleCancelEdit() {
        {loading && <p className="loading">Loading...</p>}
 
       
-      <ErrorMessage message={error} />
+      <ErrorMessage message={error?.general} />
       <SuccessMessage message={success} />
 
       <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} 
