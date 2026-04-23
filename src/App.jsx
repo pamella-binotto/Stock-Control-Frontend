@@ -30,7 +30,8 @@ function handleCancelEdit() {
       <SuccessMessage message={success} />
 
       <ProductForm onCreate={handleCreate}  editingProduct={editingProduct} 
-      onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} loading={loading}/>
+      onUpdate={handleUpdate} onCancelEdit={handleCancelEdit} 
+      loading={loading} error = {error} />
       
       <ProductList products={products} onDelete={handleDelete}
        onEdit={handleEdit}  />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import "./ProductForm.css";
 
-function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading }) {
+function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading, error }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -35,7 +36,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
 
     if (editingProduct) {
       onUpdate(editingProduct.id, product);
-      onCancelEdit(); 
+      onCancelEdit();
     } else {
       onCreate(product);
     }
@@ -45,16 +46,47 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
 
   return (
     <form onSubmit={handleSubmit}>
-      <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-      <input placeholder="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-      <input placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
-      <input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+      <div className="form-group">
+        <input className={error ? "input error" : "input"}
+          placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+        {error?.name && (
+          <p className="error-text"> {error.name}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <input className={error ? "input error" : "input"}
+          placeholder="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+
+        {error?.quantity && (
+          <p className="error-text">{error.quantity}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <input className={error ? "input error" : "input"}
+          placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} />
+
+        {error?.price && (
+          <p className="error-text">{error.price}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <input className={error ? "input error" : "input"}
+          placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+        {error?.category && (
+          <p className="error-text">{error.category}</p>
+        )}
+      </div>
 
       <button type="submit">
         {loading ? "Saving..." : editingProduct ? "Update" : "Register"}
       </button>
 
-      
+
       {editingProduct && (
         <button
           type="button"
