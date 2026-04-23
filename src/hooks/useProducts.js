@@ -37,28 +37,26 @@ export function useProducts() {
     }
   }
 
-  function extractErrorMessage(err, defaultMessage){
-      if (err.errors){
-        return Object.values(err.errors).join(", ");
-      }
-      if (err.message){
-        return err.message;
-      }
-      return defaultMessage
+  function extractErrorMessage(err, defaultMessage) {
+    if (err.errors) {
+      return err.errors;
+    }
+    return { general: err.message || defaultMessage };
   }
+
 
   async function handleCreate(product) {
     try {
       setLoading(true);
+
       const newProduct = await createProduct(product);
       setProducts((prev) => [...prev, newProduct]);
+
       setError(null);
       setSuccess("Product created successfully.")
     } catch (err) {
-      if(err){
-        setError(extractErrorMessage(err, "Failed to create product."))
-      }
-
+      
+      setError(extractErrorMessage(err, "Failed to create product."))
       setSuccess(null);
 
     }
