@@ -16,7 +16,7 @@ export function useProducts() {
     if (success) {
       const timer = setTimeout(() =>
         setSuccess(null),
-        3000);
+        2000);
 
       return () => clearTimeout(timer);
 
@@ -75,7 +75,7 @@ export function useProducts() {
       setProducts((prev) => [...prev, newProduct]);
 
       setError(null);
-      setSuccess("Product created successfully.")
+      setSuccess("Product created successfully ✅")
     } catch (err) {
 
       setError(extractErrorMessage(err, "Failed to create product."))

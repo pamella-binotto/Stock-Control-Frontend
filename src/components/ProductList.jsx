@@ -1,8 +1,9 @@
 import "./ProductList.css"
-import formatPrice from "../utils/format"; "../utils/format"
+import formatPrice from "../utils/format"; 
+
+
 
 function ProductList({ products, onDelete, onEdit, loading }) {
-
 
   if (loading) {
     return <p className="spinner">Loading...</p>;
