@@ -13,6 +13,8 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
       setQuantity(editingProduct.quantity);
       setPrice(editingProduct.price);
       setCategory(editingProduct.category);
+    } else{
+      resetForm();
     }
   }, [editingProduct]);
 

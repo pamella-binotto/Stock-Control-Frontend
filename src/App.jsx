@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
 import ErrorMessage from "./components/ErrorMessage";
@@ -18,6 +18,12 @@ function handleCancelEdit() {
   clearError();
   setEditingProduct(null);
 }
+
+useEffect(() => {
+  if (success){
+    setEditingProduct(null);
+  }
+}, [success]);
   
 
   return (
