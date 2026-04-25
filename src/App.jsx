@@ -42,10 +42,10 @@ function App() {
 
       <ProductForm onCreate={handleCreate} editingProduct={editingProduct}
         onUpdate={handleUpdate} onCancelEdit={handleCancelEdit}
-        loading={loading} error={error} />
+        loading={loading} error={error} success={success} />
 
 
-      <input className="input" placeholder="Search product..." value={search}
+      <input className="search-input" placeholder="Search product ... 🔎" value={search}
         onChange={(e) => setSearch(e.target.value)} />
 
       <ProductList products={filteredProducts} onDelete={handleDelete}

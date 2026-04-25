@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./ProductForm.css";
 
-function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading, error }) {
+function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading, error, success }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -17,6 +17,12 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
       resetForm();
     }
   }, [editingProduct]);
+
+  useEffect(() => {
+  if (success) {
+    resetForm();
+  }
+}, [success]);
 
 
   function resetForm() {
