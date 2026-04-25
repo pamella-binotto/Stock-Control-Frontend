@@ -1,4 +1,5 @@
 import "./ProductList.css"
+import formatPrice from "../utils/format"; "../utils/format"
 
 function ProductList({ products, onDelete, onEdit, loading }) {
 
@@ -21,7 +22,7 @@ function ProductList({ products, onDelete, onEdit, loading }) {
           <div className="product-info">
             <strong>{product.name}</strong>
             <span>Quantity: {product.quantity}</span>
-            <span>Price: {product.price}</span>
+            <span>Price: {formatPrice(product.price)}</span>
             <span>Category: {product.category}</span>
           </div>
 
