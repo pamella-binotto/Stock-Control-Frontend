@@ -109,6 +109,7 @@ export function useProducts() {
   async function handleUpdate(id, product) {
     try {
       setLoading(true);
+      setError(null);
       const updated = await updateProduct(id, product);
 
       setProducts((prev) =>
@@ -123,6 +124,10 @@ export function useProducts() {
       setLoading(false);
     }
   }
+
+  function clearError() {
+  setError(null);
+}
 
 
   return {

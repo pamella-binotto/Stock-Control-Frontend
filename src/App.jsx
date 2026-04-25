@@ -4,7 +4,7 @@ import ProductList from "./components/ProductList";
 import ErrorMessage from "./components/ErrorMessage";
 import SuccessMessage from "./components/SuccessMessage";
 import { useProducts } from "./hooks/useProducts";
-
+import "./App.css";
 
 function App() {
   const { products, error, success, loading, handleCreate, handleDelete, handleUpdate} = useProducts();
@@ -15,13 +15,14 @@ function App() {
 }
 
 function handleCancelEdit() {
+  clearError();
   setEditingProduct(null);
 }
   
 
   return (
-    <div>
-      <h1>Stock</h1>
+    <div className="app-container">
+      <h1 className="title">Stock</h1>
 
        {loading && <p className="loading">Loading...</p>}
 

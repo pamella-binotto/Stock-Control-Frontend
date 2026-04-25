@@ -27,21 +27,22 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
   function handleSubmit(e) {
     e.preventDefault();
 
+
     const product = {
       name,
-      quantity: quantity === "" ? null : Number(quantity),
-      price: Number(price),
+      quantity: quantity === "" ? null : parseInt(quantity),
+      price: price === "" ? null : parseFloat(parseFloat(price).toFixed(2)),
       category,
     };
 
+    console.log("Enviando:", JSON.stringify(product));
+
     if (editingProduct) {
       onUpdate(editingProduct.id, product);
-      onCancelEdit();
     } else {
       onCreate(product);
     }
 
-    resetForm();
   }
 
   return (
@@ -82,7 +83,7 @@ function ProductForm({ onCreate, onUpdate, editingProduct, onCancelEdit, loading
         )}
       </div>
 
-      <button type="submit">
+      <button type="submit" disabled={loading}>
         {loading ? "Saving..." : editingProduct ? "Update" : "Register"}
       </button>
 
