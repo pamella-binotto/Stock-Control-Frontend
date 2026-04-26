@@ -94,9 +94,11 @@ src/
 │
 ├── components/
 │   ├── ProductForm.jsx
+│   ├── ProductForm.css
 │   ├── ProductList.jsx
+│   ├── ProductList.css
 │   ├── ErrorMessage.jsx
-│   └── SuccessMessage.jsx
+│   ├── SuccessMessage.jsx
 │
 ├── hooks/
 │   └── useProducts.js
@@ -108,6 +110,8 @@ src/
 │   └── format.js
 │
 ├── App.jsx
+├── App.css
+└── index.css
 └── main.jsx
 ```
 
