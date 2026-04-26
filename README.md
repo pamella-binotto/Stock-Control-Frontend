@@ -1,116 +1,159 @@
-# 🎨 Stock Control Frontend
+# 📦 Stock Control Frontend
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Em%20Construção-yellow?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Finalizado-brightgreen?style=for-the-badge" />
   <img src="https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react" />
   <img src="https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=for-the-badge&logo=vite" />
   <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/CSS-UI_Styling-264de4?style=for-the-badge&logo=css3" />
   <img src="https://img.shields.io/badge/REST_API-Integration-green?style=for-the-badge" />
 </p>
 
 ---
 
-> 🚧 **Projeto em Construção**
-> Este frontend ainda está em desenvolvimento. Novas funcionalidades, melhorias visuais e refinamentos de UX/UI estão sendo adicionados continuamente.
+## 📖 Sobre o Projeto
+
+O **Stock Control Frontend** é uma aplicação web desenvolvida com **React** para gerenciamento de estoque, consumindo uma API REST construída em Java com Spring Boot.
+
+O sistema permite o controle completo de produtos, incluindo cadastro, edição, exclusão e busca, com validações integradas entre frontend e backend.
+
+Este projeto foi desenvolvido com foco em simular um cenário real de aplicação full stack, aplicando boas práticas de organização, UX e tratamento de erros.
 
 ---
 
-## 📖 Sobre o Projeto
+## 🎥 Demonstração
 
-O **Stock Control Frontend** é a interface web da aplicação de gerenciamento de estoque, desenvolvida com **React** para consumir a API backend e permitir o gerenciamento completo de produtos de forma visual e interativa.
+![Search](docs/images/search.gif)
 
-Este projeto foi criado com foco em praticar integração entre frontend e backend em uma aplicação full stack real.
+👉 Foi implementado um **filtro de busca em tempo real**, permitindo localizar produtos dinamicamente conforme o usuário digita.  
+A lógica foi construída com manipulação de estado no React (`useState`) e filtragem de arrays.
+
+---
+
+## 🖼️ Interface da Aplicação
+
+### 📋 Home / Listagem de Produtos
+![Home](docs/images/home.png)
+
+A tela principal exibe os produtos cadastrados em formato de cards, com um layout limpo e organizado.  
+O design foi pensado para facilitar a leitura das informações e destacar ações como **edição e exclusão**.
+
+---
+
+### 📱 Responsividade
+![Responsive](docs/images/responsive.png)
+
+A interface foi construída utilizando **Flexbox**, garantindo adaptação para diferentes tamanhos de tela.  
+O layout se ajusta automaticamente para oferecer uma boa experiência tanto em desktop quanto em dispositivos móveis.
+
+---
+
+### ⚠️ Validação de Dados
+![Validation](docs/images/validation.png)
+
+As validações são realizadas no backend utilizando **Spring Boot**, retornando mensagens estruturadas para o frontend.
+
+👉 Backend do projeto:  
+[🔗Stock Control (Java + Spring Boot)](https://github.com/pamella-binotto/Stock-Control)
+
+No frontend, essas mensagens são tratadas e exibidas dinamicamente utilizando **React Hooks (`useState` e `useEffect`)**, permitindo feedback imediato ao usuário com destaque visual nos campos inválidos.
 
 ---
 
 ## ✨ Funcionalidades
 
-* ✅ Listagem de produtos em tempo real
+* ✅ Listagem de produtos
 * ✅ Cadastro de novos produtos
+* ✅ Edição de produtos
 * ✅ Remoção de produtos
-* ✅ Integração completa com API REST
-* ✅ Atualização automática de estado após operações
-* 🚧 Edição de produtos (em desenvolvimento)
-* 🚧 Melhorias de estilização e responsividade
+* ✅ Busca por nome em tempo real
+* ✅ Validação de campos (frontend + backend)
+* ✅ Feedback visual de sucesso e erro
+* ✅ Formatação de moeda (BRL)
+* ✅ Layout responsivo
+* ✅ Estados de loading
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-| Tecnologia | Função                                |
-| ---------- | ------------------------------------- |
-| React      | Biblioteca principal do frontend      |
-| Vite       | Bundler / ambiente de desenvolvimento |
-| JavaScript | Lógica da aplicação                   |
-| Fetch API  | Comunicação com backend               |
-| CSS        | Estilização da interface              |
+| Tecnologia | Função |
+|----------|--------|
+| React | Biblioteca principal do frontend |
+| Vite | Ambiente de desenvolvimento |
+| JavaScript | Lógica da aplicação |
+| CSS | Estilização da interface |
+| Fetch API | Comunicação com backend |
 
 ---
 
 ## 📁 Estrutura do Projeto
 
-```text id="6h5g4m"
+```
 src/
 │
-├── components/      # Componentes reutilizáveis
+├── components/
 │   ├── ProductForm.jsx
-│   └── ProductList.jsx
+│   ├── ProductList.jsx
+│   ├── ErrorMessage.jsx
+│   └── SuccessMessage.jsx
 │
-├── services/        # Comunicação com API
+├── hooks/
+│   └── useProducts.js
+│
+├── services/
 │   └── api.js
 │
-├── App.jsx          # Componente principal
-└── main.jsx         # Entry point da aplicação
+├── utils/
+│   └── format.js
+│
+├── App.jsx
+└── main.jsx
 ```
-
----
-
-## 🔗 Integração com Backend
-
-Este frontend consome a API REST disponível no repositório:
-
-➡️ **Backend Java/Spring:**
 
 ---
 
 ## ▶️ Como Executar o Projeto
 
-### 1. Clonar o Repositório
+### 1. Clonar o repositório
 
-```bash id="j1y6mr"
+```bash
 git clone https://github.com/pamella-binotto/Stock-Control-Frontend.git
 ```
 
 ---
 
-### 2. Instalar Dependências
+### 2. Instalar dependências
 
-```bash id="epk30p"
+```bash
 npm install
 ```
 
 ---
 
-### 3. Iniciar Ambiente de Desenvolvimento
+### 3. Iniciar aplicação
 
-```bash id="t6e9ua"
+```bash
 npm run dev
 ```
 
 ---
 
-## 🚀 Melhorias Futuras
+## 🧠 Aprendizados
 
-* Implementação de edição de produtos
-* Modal de confirmação para exclusão
-* Feedback visual de carregamento
-* Tratamento de erros de requisição
-* Responsividade mobile
-* Deploy da aplicação
+Durante o desenvolvimento deste projeto, foram aplicados conceitos importantes como:
+
+- Gerenciamento de estado com React Hooks  
+- Integração com API REST  
+- Tratamento de erros estruturados  
+- Validação de formulários  
+- Organização de código por responsabilidade  
+- Manipulação de listas e filtros dinâmicos  
+- Experiência do usuário (UX)  
 
 ---
 
 ## 👩‍💻 Autora
-Pamella Binotto Desenvolvedora Backend / Full Stack em formação 🚀
-**Pamella Binotto**
-DesenvolvedoPamella Binotto Desenvolvedora Backend / Full Stack em formação 🚀ra Frontend / Backend em formação 🚀
+
+**Pamella Binotto**  
+Desenvolvedora Full Stack 🚀
