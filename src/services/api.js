@@ -1,5 +1,4 @@
-const BASE_URL = "http://localhost:8080/products";
-
+const BASE_URL = `${import.meta.env.VITE_API_URL}/products`;
 
 async function handleResponse(response) {
   const data = await response.json();
