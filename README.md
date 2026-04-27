@@ -21,6 +21,15 @@ Este projeto foi desenvolvido com foco em simular um cenário real de aplicaçã
 
 ---
 
+## 🚀 Deploy
+
+A aplicação está disponível em produção:
+➡️ [Site Stock Control](https://stock-control-frontend-kqxm.onrender.com/)
+
+> ⚠️ Por consumir uma API no plano gratuito do Render, a aplicação pode levar até 50 segundos para carregar os dados após um período de inatividade.
+
+---
+
 ## 🎥 Demonstração
 
 ![Search](docs/images/search.gif)
