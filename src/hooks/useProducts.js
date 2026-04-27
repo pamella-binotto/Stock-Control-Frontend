@@ -88,23 +88,21 @@ export function useProducts() {
   }
 
   async function handleDelete(id) {
+  const confirmDelete = window.confirm("Are you sure you want to delete?");
+  if (!confirmDelete) return;
 
-    const confirmDelete = window.confirm("Are you sure you want to delete?");
-    if (!confirmDelete) return;
-
-    try {
-      setLoading(true);
-      await deleteProduct(id);
-      setProducts((prev) => prev.filter((p) => p.id !== id));
-      setSuccess("Product deleted successfully ✅")
-    } catch (err) {
-      setError(extractErrorMessage(err, "Failed to delete product."));
-      setSuccess(null);
-    }
-    finally {
-      setLoading(false);
-    }
+  try {
+    setLoading(true);
+    await deleteProduct(id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+    setSuccess("Product deleted successfully ✅");
+  } catch (err) {
+    setError(extractErrorMessage(err, "Failed to delete product."));
+    setSuccess(null);
+  } finally {
+    setLoading(false);
   }
+}
 
   async function handleUpdate(id, product) {
     try {
@@ -137,7 +135,8 @@ export function useProducts() {
     loading,
     handleCreate,
     handleDelete,
-    handleUpdate
+    handleUpdate,
+    clearError
   };
 }
 

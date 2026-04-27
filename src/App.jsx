@@ -49,7 +49,7 @@ function App() {
         onChange={(e) => setSearch(e.target.value)} />
 
       <ProductList products={filteredProducts} onDelete={handleDelete}
-        onEdit={handleEdit} loading={loading}/>
+        onEdit={handleEdit}/>
 
     </div>
   );

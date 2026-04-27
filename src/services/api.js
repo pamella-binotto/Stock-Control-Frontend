@@ -1,7 +1,8 @@
 const BASE_URL = `${import.meta.env.VITE_API_URL}/products`;
 
 async function handleResponse(response) {
-  const data = await response.json();
+  const text = await response.text();
+  const data = text ? JSON.parse(text) : null;
 
   if (!response.ok) {
     throw data;
